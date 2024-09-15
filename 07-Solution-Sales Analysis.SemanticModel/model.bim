@@ -1,0 +1,1729 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Salesperson (Performance)\",\"SalespersonRegion\",\"Product\",\"Reseller\",\"Region\",\"Sales\",\"Targets\",\"ColorFormats\",\"SQLInstance\",\"Database\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.132.1053.0 (24.08)"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "fastCombine": true,
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "ColorFormats",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/MicrosoftLearning/PL-300-Microsoft-Power-BI-Data-Analyst/Main/Allfiles/Resources/ColorFormats.csv\"),[Delimiter=\",\", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}, {\"Column2\", type text}, {\"Column3\", type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Changed Type\", [PromoteAllScalars=true]),",
+          "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Color\", type text}, {\"Background Color Format\", type text}, {\"Font Color Format\", type text}})",
+          "in",
+          "    #\"Changed Type1\""
+        ],
+        "kind": "m",
+        "lineageTag": "8b29b44d-24ec-46d0-b9f2-0c0052d998c6"
+      },
+      {
+        "name": "SQLInstance",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Text"
+          }
+        ],
+        "expression": "\"localhost\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "6f15ac10-a0d4-4670-8ee9-1fdf3d593f61"
+      },
+      {
+        "name": "Database",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Text"
+          }
+        ],
+        "expression": "\"AdventureWorksDW2020\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "787b676a-fbc0-4a2a-8c85-4f0307bae0e4"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "337a2a65-a524-5200-ffa1-fe63f49de233",
+        "fromColumn": "ProductKey",
+        "fromTable": "Sales",
+        "toColumn": "ProductKey",
+        "toTable": "Product"
+      },
+      {
+        "name": "54e760c0-ed91-374c-3ce7-e372fa7fa483",
+        "fromColumn": "SalesTerritoryKey",
+        "fromTable": "Sales",
+        "toColumn": "SalesTerritoryKey",
+        "toTable": "Region"
+      },
+      {
+        "name": "0cc9b6a8-4c34-8503-dd93-c0291078795d",
+        "fromColumn": "ResellerKey",
+        "fromTable": "Sales",
+        "toColumn": "ResellerKey",
+        "toTable": "Reseller"
+      },
+      {
+        "name": "4ee05b49-a653-04bd-0b7b-d697f0963680",
+        "fromColumn": "EmployeeKey",
+        "fromTable": "SalespersonRegion",
+        "toColumn": "EmployeeKey",
+        "toTable": "Salesperson (Performance)"
+      },
+      {
+        "name": "06d2419f-fdcc-47a0-4707-038f2ceb7174",
+        "crossFilteringBehavior": "bothDirections",
+        "fromColumn": "SalesTerritoryKey",
+        "fromTable": "SalespersonRegion",
+        "toColumn": "SalesTerritoryKey",
+        "toTable": "Region"
+      },
+      {
+        "name": "b67f057a-6409-6474-fce4-595e8035683f",
+        "fromColumn": "EmployeeID",
+        "fromTable": "Targets",
+        "toColumn": "EmployeeID",
+        "toTable": "Salesperson (Performance)"
+      },
+      {
+        "name": "cc2e0e7c-5b82-65cc-30a8-f822bbac58eb",
+        "fromColumn": "OrderDate",
+        "fromTable": "Sales",
+        "toColumn": "Date",
+        "toTable": "Date"
+      },
+      {
+        "name": "fe41aee4-4daa-952a-eb7a-93434d340a5f",
+        "fromColumn": "EmployeeKey",
+        "fromTable": "Sales",
+        "toColumn": "EmployeeKey",
+        "toTable": "Salesperson"
+      },
+      {
+        "name": "4b28c4f5-2d51-4740-a3a6-32733b5b9da4",
+        "fromColumn": "TargetMonth",
+        "fromTable": "Targets",
+        "toColumn": "Date",
+        "toTable": "Date"
+      }
+    ],
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "Salesperson (Performance)",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "EmployeeKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "c44af1bf-53ad-476e-b494-3839e0c3204c",
+            "sourceColumn": "EmployeeKey",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "EmployeeID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "29d6a6cb-8d7c-4fac-bd97-824645bff4c3",
+            "sourceColumn": "EmployeeID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Title",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8efa946d-14e2-4138-bc8c-5136c2a775be",
+            "sourceColumn": "Title",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "UPN",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "string",
+            "isHidden": true,
+            "lineageTag": "b7627f0f-d6d9-4bcf-9d3c-dacff4ec08af",
+            "sourceColumn": "UPN",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Salesperson",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "665b013f-c666-4d6b-bc2c-d3d668ba96c7",
+            "sourceColumn": "Salesperson",
+            "summarizeBy": "none"
+          }
+        ],
+        "description": "Salesperson related to region(s)",
+        "lineageTag": "30cafbe7-1db4-40f7-a023-2211b63f024f",
+        "partitions": [
+          {
+            "name": "Salesperson (Performance)",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(SQLInstance),",
+                "    AdventureWorksDW2020 = Source{[Name=Database]}[Data],",
+                "    dbo_DimEmployee = AdventureWorksDW2020{[Schema=\"dbo\",Item=\"DimEmployee\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_DimEmployee, each ([SalesPersonFlag] = true)),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Filtered Rows\",{\"EmployeeKey\", \"EmployeeNationalIDAlternateKey\", \"FirstName\", \"LastName\", \"Title\", \"EmailAddress\"}),",
+                "    #\"Merged Columns\" = Table.CombineColumns(#\"Removed Other Columns\",{\"FirstName\", \"LastName\"},Combiner.CombineTextByDelimiter(\" \", QuoteStyle.None),\"Salesperson\"),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Merged Columns\",{{\"EmployeeNationalIDAlternateKey\", \"EmployeeID\"}, {\"EmailAddress\", \"UPN\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalespersonRegion",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "EmployeeKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "8ab8ec41-c04d-4740-ac69-a93e839b2433",
+            "sourceColumn": "EmployeeKey",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SalesTerritoryKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f80a41e7-424f-4921-b2e6-83ee3f6cbfe3",
+            "sourceColumn": "SalesTerritoryKey",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "1bc088d9-fc8b-44d4-a55c-864d6465b75c",
+        "partitions": [
+          {
+            "name": "SalespersonRegion",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(SQLInstance),",
+                "    AdventureWorksDW2020 = Source{[Name=Database]}[Data],",
+                "    dbo_DimEmployeeSalesTerritory = AdventureWorksDW2020{[Schema=\"dbo\",Item=\"DimEmployeeSalesTerritory\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(dbo_DimEmployeeSalesTerritory,{\"DimEmployee\", \"DimSalesTerritory\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Product",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ProductKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "678d8652-936a-4dba-a325-58e53bb3af87",
+            "sourceColumn": "ProductKey",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Product",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a5e7dfaa-38f3-4305-91eb-04e3ccde571b",
+            "sourceColumn": "Product",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Standard Cost",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
+            "lineageTag": "75a01e1a-9dea-46b0-aca4-02d9fa627859",
+            "sourceColumn": "Standard Cost",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Color",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0fb9b24a-8122-4d20-b69f-7762edaced8c",
+            "sourceColumn": "Color",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Subcategory",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5b8c3cee-1210-4525-86c3-aca2b361607e",
+            "sourceColumn": "Subcategory",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Category",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d56f91e3-f005-42c6-a26e-69acb2b654e8",
+            "sourceColumn": "Category",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Background Color Format",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "displayFolder": "Formatting",
+            "lineageTag": "4ee84a8b-24bc-4222-99a8-edd95f508a5c",
+            "sourceColumn": "Background Color Format",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Font Color Format",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "displayFolder": "Formatting",
+            "lineageTag": "c45bccf0-8553-4d22-8593-e62f9b75f558",
+            "sourceColumn": "Font Color Format",
+            "summarizeBy": "none"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Products",
+            "levels": [
+              {
+                "name": "Category",
+                "column": "Category",
+                "lineageTag": "500aa3db-b455-491e-a51d-ff829ff0f0a3",
+                "ordinal": 0
+              },
+              {
+                "name": "Subcategory",
+                "column": "Subcategory",
+                "lineageTag": "c1755584-5d1c-45d7-86c2-fa3872a44c70",
+                "ordinal": 1
+              },
+              {
+                "name": "Product",
+                "column": "Product",
+                "lineageTag": "fa0b3f0a-effa-4751-b9a6-d8793722513b",
+                "ordinal": 2
+              }
+            ],
+            "lineageTag": "a9b76147-b249-4316-90c0-9fc7ef184e0d"
+          }
+        ],
+        "lineageTag": "dd665867-e7a6-4a52-9aad-35c90f0546d2",
+        "partitions": [
+          {
+            "name": "Product",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(SQLInstance),",
+                "    AdventureWorksDW2020 = Source{[Name=Database]}[Data],",
+                "    dbo_DimProduct = AdventureWorksDW2020{[Schema=\"dbo\",Item=\"DimProduct\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_DimProduct, each ([FinishedGoodsFlag] = true)),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Filtered Rows\",{\"ProductKey\", \"EnglishProductName\", \"StandardCost\", \"Color\", \"DimProductSubcategory\"}),",
+                "    #\"Expanded DimProductSubcategory\" = Table.ExpandRecordColumn(#\"Removed Other Columns\", \"DimProductSubcategory\", {\"EnglishProductSubcategoryName\", \"DimProductCategory\"}, {\"EnglishProductSubcategoryName\", \"DimProductCategory\"}),",
+                "    #\"Expanded DimProductCategory\" = Table.ExpandRecordColumn(#\"Expanded DimProductSubcategory\", \"DimProductCategory\", {\"EnglishProductCategoryName\"}, {\"EnglishProductCategoryName\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Expanded DimProductCategory\",{{\"EnglishProductName\", \"Product\"}, {\"StandardCost\", \"Standard Cost\"}, {\"EnglishProductSubcategoryName\", \"Subcategory\"}, {\"EnglishProductCategoryName\", \"Category\"}}),",
+                "    #\"Merged Queries\" = Table.NestedJoin(#\"Renamed Columns\", {\"Color\"}, ColorFormats, {\"Color\"}, \"ColorFormats\", JoinKind.LeftOuter),",
+                "    #\"Expanded ColorFormats\" = Table.ExpandTableColumn(#\"Merged Queries\", \"ColorFormats\", {\"Background Color Format\", \"Font Color Format\"}, {\"Background Color Format\", \"Font Color Format\"})",
+                "in",
+                "    #\"Expanded ColorFormats\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Reseller",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ResellerKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "6e7e9057-9f99-4e3d-b97a-8f1971657186",
+            "sourceColumn": "ResellerKey",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Business Type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "22cb0578-d589-4fc7-8658-750d9783ca51",
+            "sourceColumn": "Business Type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Reseller",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b487d3bb-83eb-4ca3-a470-8efb781d68d2",
+            "sourceColumn": "Reseller",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "City",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "City",
+            "dataType": "string",
+            "lineageTag": "35c811f8-8abf-442d-a31e-71b02f7e1af3",
+            "sourceColumn": "City",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "State-Province",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "StateOrProvince",
+            "dataType": "string",
+            "lineageTag": "987ad92b-87ef-4c9a-87aa-7cd7c9a3036b",
+            "sourceColumn": "State-Province",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Country-Region",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "Country",
+            "dataType": "string",
+            "lineageTag": "aa6ac85c-86e5-4f58-b75a-8376c0c8ac42",
+            "sourceColumn": "Country-Region",
+            "summarizeBy": "none"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Resellers",
+            "levels": [
+              {
+                "name": "Reseller",
+                "column": "Reseller",
+                "lineageTag": "c409da2a-cfc5-482f-a171-80afc91352c7",
+                "ordinal": 0
+              },
+              {
+                "name": "Business Type",
+                "column": "Business Type",
+                "lineageTag": "7c25b373-faf0-4d10-a202-ee79a8923eb8",
+                "ordinal": 1
+              }
+            ],
+            "lineageTag": "a54c82a1-76ba-48de-9948-18488253b5a1"
+          },
+          {
+            "name": "Geography",
+            "levels": [
+              {
+                "name": "Country-Region",
+                "column": "Country-Region",
+                "lineageTag": "2caa75c9-b1ee-4e4f-be2b-112f07f20a51",
+                "ordinal": 0
+              },
+              {
+                "name": "State-Province",
+                "column": "State-Province",
+                "lineageTag": "6e0b034e-4310-4f2f-8d4a-a544c023a742",
+                "ordinal": 1
+              },
+              {
+                "name": "City",
+                "column": "City",
+                "lineageTag": "732d00cb-430b-4b8f-8097-84e839c26481",
+                "ordinal": 2
+              },
+              {
+                "name": "Reseller",
+                "column": "Reseller",
+                "lineageTag": "81d9a1b5-da16-4b32-bf19-f4f6bc8bdb76",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "e1563909-1070-432c-b5b8-2e6b8ab5144d"
+          }
+        ],
+        "lineageTag": "8f18aec2-8698-42c2-a2d0-6e0ab97c60ed",
+        "partitions": [
+          {
+            "name": "Reseller",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(SQLInstance),",
+                "    AdventureWorksDW2020 = Source{[Name=Database]}[Data],",
+                "    dbo_DimReseller = AdventureWorksDW2020{[Schema=\"dbo\",Item=\"DimReseller\"]}[Data],",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(dbo_DimReseller,{\"ResellerKey\", \"BusinessType\", \"ResellerName\", \"DimGeography\"}),",
+                "    #\"Expanded DimGeography\" = Table.ExpandRecordColumn(#\"Removed Other Columns\", \"DimGeography\", {\"City\", \"StateProvinceName\", \"EnglishCountryRegionName\"}, {\"City\", \"StateProvinceName\", \"EnglishCountryRegionName\"}),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Expanded DimGeography\",\"Ware House\",\"Warehouse\",Replacer.ReplaceText,{\"BusinessType\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Replaced Value\",{{\"BusinessType\", \"Business Type\"}, {\"ResellerName\", \"Reseller\"}, {\"StateProvinceName\", \"State-Province\"}, {\"EnglishCountryRegionName\", \"Country-Region\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Region",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "SalesTerritoryKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "f4528c79-1b41-49c4-85eb-37659b17b9ff",
+            "sourceColumn": "SalesTerritoryKey",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Region",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "bc3c173c-de85-4fda-a7b2-558608e12c73",
+            "sourceColumn": "Region",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Country",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "Country",
+            "dataType": "string",
+            "lineageTag": "2d895830-1ae2-4591-9e37-93ef1acd8059",
+            "sourceColumn": "Country",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Group",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "baec4f43-4cd6-42b1-8acf-ce51387016ae",
+            "sourceColumn": "Group",
+            "summarizeBy": "none"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Regions",
+            "levels": [
+              {
+                "name": "Group",
+                "column": "Group",
+                "lineageTag": "a50cefde-441a-480b-92f3-b97366e2001e",
+                "ordinal": 0
+              },
+              {
+                "name": "Country",
+                "column": "Country",
+                "lineageTag": "8e84fcee-331d-4e85-9de8-a69ffbba4ed4",
+                "ordinal": 1
+              },
+              {
+                "name": "Region",
+                "column": "Region",
+                "lineageTag": "f48dfa0d-4137-4515-9035-fc5a61d3eacb",
+                "ordinal": 2
+              }
+            ],
+            "lineageTag": "2952f8f8-8b0e-4ee8-8d4a-f684f8791e60"
+          }
+        ],
+        "lineageTag": "5f6774b0-7a2d-4c98-a680-f126af8c7e5c",
+        "partitions": [
+          {
+            "name": "Region",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(SQLInstance),",
+                "    AdventureWorksDW2020 = Source{[Name=Database]}[Data],",
+                "    dbo_DimSalesTerritory = AdventureWorksDW2020{[Schema=\"dbo\",Item=\"DimSalesTerritory\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_DimSalesTerritory, each ([SalesTerritoryAlternateKey] <> 0)),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Filtered Rows\",{\"SalesTerritoryKey\", \"SalesTerritoryRegion\", \"SalesTerritoryCountry\", \"SalesTerritoryGroup\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Other Columns\",{{\"SalesTerritoryRegion\", \"Region\"}, {\"SalesTerritoryCountry\", \"Country\"}, {\"SalesTerritoryGroup\", \"Group\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sales",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "SalesOrderNumber",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "string",
+            "isHidden": true,
+            "lineageTag": "f7a951a1-052d-44bb-911c-0f487977d8e6",
+            "sourceColumn": "SalesOrderNumber",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "OrderDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "isHidden": true,
+            "lineageTag": "f09e25ae-d1b9-4233-80a0-f947efe49834",
+            "sourceColumn": "OrderDate",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ProductKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "322e241e-6244-4cd7-bb79-bf30ad967c85",
+            "sourceColumn": "ProductKey",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ResellerKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "fa69a045-873a-49b5-847a-2eda5565fab7",
+            "sourceColumn": "ResellerKey",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "EmployeeKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "84ab0fd3-0c83-4456-a495-f0e3817be1b3",
+            "sourceColumn": "EmployeeKey",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SalesTerritoryKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "e2190568-d580-4d50-abaf-e366040afd52",
+            "sourceColumn": "SalesTerritoryKey",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Quantity",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDecimal\":true}"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "#,0",
+            "lineageTag": "1f8ac87e-c2b3-4d8f-bf03-f927b297974e",
+            "sourceColumn": "Quantity",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Unit Price",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "isHidden": true,
+            "lineageTag": "914c5056-0675-4279-90b9-9b47f4096186",
+            "sourceColumn": "Unit Price",
+            "summarizeBy": "average"
+          },
+          {
+            "name": "Sales",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
+            "lineageTag": "4465de7d-4f58-462b-8ddb-6207fcce0d92",
+            "sourceColumn": "Sales",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Cost",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "description": "Based in standard cost",
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
+            "lineageTag": "4891cf60-2811-4a99-9d25-63cb318cbb38",
+            "sourceColumn": "Cost",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "c90c54c3-ecc7-4006-acae-213e629b2b9e",
+        "measures": [
+          {
+            "name": "Profit",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "FormatString"
+              }
+            ],
+            "expression": [
+              "",
+              "SUM('Sales'[Sales]) - SUM('Sales'[Cost])"
+            ],
+            "extendedProperties": [
+              {
+                "name": "MeasureTemplate",
+                "type": "json",
+                "value": {
+                  "daxTemplateName": "MathematicalSubtraction",
+                  "version": 0
+                }
+              }
+            ],
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
+            "lineageTag": "e9392e16-8287-4a63-8f98-14ddbc88ec6d"
+          },
+          {
+            "name": "Profit Margin",
+            "changedProperties": [
+              {
+                "property": "FormatString"
+              }
+            ],
+            "expression": [
+              "",
+              "DIVIDE([Profit], SUM('Sales'[Sales]))"
+            ],
+            "extendedProperties": [
+              {
+                "name": "MeasureTemplate",
+                "type": "json",
+                "value": {
+                  "daxTemplateName": "MathematicalDivision",
+                  "version": 0
+                }
+              }
+            ],
+            "formatString": "#,0.00%;-#,0.00%;#,0.00%",
+            "lineageTag": "6dcf0ce0-a21f-454e-8857-7bf5e2b7b031"
+          },
+          {
+            "name": "Avg Price",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "displayFolder": "Pricing",
+            "expression": [
+              "",
+              "AVERAGE(Sales[Unit Price])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "9ca76f2a-b132-4cb0-813c-f4e65d5f9c71"
+          },
+          {
+            "name": "Median Price",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "displayFolder": "Pricing",
+            "expression": [
+              "",
+              "MEDIAN(Sales[Unit Price])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "22c94527-a543-4638-8cf7-fb934808620e"
+          },
+          {
+            "name": "Min Price",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "displayFolder": "Pricing",
+            "expression": [
+              "",
+              "MIN(Sales[Unit Price])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "94d285a5-58ae-40fb-98dd-29b64a058507"
+          },
+          {
+            "name": "Max Price",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "displayFolder": "Pricing",
+            "expression": [
+              "",
+              "MAX(Sales[Unit Price])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "793f0df1-015b-4908-b5bd-aefbd1dfdb62"
+          },
+          {
+            "name": "Orders",
+            "displayFolder": "Counts",
+            "expression": [
+              "",
+              "DISTINCTCOUNT(Sales[SalesOrderNumber])"
+            ],
+            "formatString": "0",
+            "lineageTag": "57f38fd6-cf9a-4d06-a7ee-1a306043c61b"
+          },
+          {
+            "name": "Order Lines",
+            "displayFolder": "Counts",
+            "expression": [
+              "",
+              "COUNTROWS(Sales)"
+            ],
+            "formatString": "0",
+            "lineageTag": "da03adc1-acfb-4d73-9aaa-b5e373c5e88f"
+          },
+          {
+            "name": "Sales % All Region",
+            "displayFolder": "Ratios",
+            "expression": [
+              "",
+              "DIVIDE(",
+              "\tSUM(Sales[Sales]),",
+              "\tCALCULATE(",
+              "\t\tSUM(Sales[Sales]),",
+              "\t\tREMOVEFILTERS(Region)",
+              "\t)",
+              ")"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "008e9ca5-2758-43de-9595-76282e69f31d"
+          },
+          {
+            "name": "Sales % Country",
+            "displayFolder": "Ratios",
+            "expression": [
+              "",
+              "IF(",
+              "\tISINSCOPE(Region[Region]),",
+              "\tDIVIDE(",
+              "\t\tSUM(Sales[Sales]),",
+              "\t\tCALCULATE(",
+              "\t\t\tSUM(Sales[Sales]),",
+              "\t\t\tREMOVEFILTERS(Region[Region])",
+              "\t\t)",
+              "\t)",
+              ")"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "954e603d-5c04-4a90-ad4c-8f34b04ea323"
+          },
+          {
+            "name": "Sales % Group",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Ratios",
+            "expression": [
+              "",
+              "IF(",
+              "\tISINSCOPE(Region[Region])",
+              "\t\t|| ISINSCOPE(Region[Country]),",
+              "\tDIVIDE(",
+              "\t\tSUM(Sales[Sales]),",
+              "\t\tCALCULATE(",
+              "\t\t\tSUM(Sales[Sales]),",
+              "\t\t\tREMOVEFILTERS(",
+              "\t\t\t\tRegion[Region],",
+              "\t\t\t\tRegion[Country]",
+              "\t\t\t)",
+              "\t\t)",
+              "\t)",
+              ")"
+            ],
+            "lineageTag": "565a0642-ff70-4055-95e3-f5233d204ae8"
+          },
+          {
+            "name": "Sales YTD",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "displayFolder": "Time Intelligence",
+            "expression": [
+              "",
+              "TOTALYTD(SUM(Sales[Sales]), 'Date'[Date], \"6-30\")"
+            ],
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
+            "lineageTag": "a9440108-f6a0-4e23-b6c9-9fa7662ff79b"
+          },
+          {
+            "name": "Sales YoY Growth",
+            "displayFolder": "Time Intelligence",
+            "expression": [
+              "",
+              "VAR SalesPriorYear =",
+              "\tCALCULATE(",
+              "\t\tSUM(Sales[Sales]),",
+              "\t\tPARALLELPERIOD(",
+              "\t\t\t'Date'[Date],",
+              "\t\t\t-12,",
+              "\t\t\tMONTH",
+              "\t\t)",
+              "\t)",
+              "RETURN",
+              "\tDIVIDE(",
+              "\t\t(SUM(Sales[Sales]) - SalesPriorYear),",
+              "\t\tSalesPriorYear",
+              "\t)"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "5e215bb9-dc07-4caa-a171-431cb225e29a"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Sales",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(SQLInstance),",
+                "    AdventureWorksDW2020 = Source{[Name=Database]}[Data],",
+                "    dbo_FactResellerSales = AdventureWorksDW2020{[Schema=\"dbo\",Item=\"FactResellerSales\"]}[Data],",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(dbo_FactResellerSales,{\"SalesOrderNumber\", \"OrderDate\", \"ProductKey\", \"ResellerKey\", \"EmployeeKey\", \"SalesTerritoryKey\", \"OrderQuantity\", \"UnitPrice\", \"TotalProductCost\", \"SalesAmount\", \"DimProduct\"}),",
+                "    #\"Expanded DimProduct\" = Table.ExpandRecordColumn(#\"Removed Other Columns\", \"DimProduct\", {\"StandardCost\"}, {\"StandardCost\"}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Expanded DimProduct\", \"Cost\", each if [TotalProductCost] = null then [OrderQuantity] * [StandardCost] else [TotalProductCost]),",
+                "    #\"Removed Other Columns1\" = Table.SelectColumns(#\"Added Custom\",{\"SalesOrderNumber\", \"OrderDate\", \"ProductKey\", \"ResellerKey\", \"EmployeeKey\", \"SalesTerritoryKey\", \"OrderQuantity\", \"UnitPrice\", \"SalesAmount\", \"Cost\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Other Columns1\",{{\"OrderQuantity\", \"Quantity\"}, {\"UnitPrice\", \"Unit Price\"}, {\"SalesAmount\", \"Sales\"}}),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Renamed Columns\",{{\"Quantity\", Int64.Type}, {\"Unit Price\", Currency.Type}, {\"Sales\", Currency.Type}, {\"Cost\", Currency.Type}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Targets",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "EmployeeID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "7552db63-13e7-4c1c-8e70-ee51dcd1066d",
+            "sourceColumn": "EmployeeID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TargetAmount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "isHidden": true,
+            "lineageTag": "c8642aff-9cd7-43b3-ad05-ba32d7661db3",
+            "sourceColumn": "TargetAmount",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "TargetMonth",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "isHidden": true,
+            "lineageTag": "542d3ac9-7ec1-4b7a-8768-ea712b42a580",
+            "sourceColumn": "TargetMonth",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "fc05aa02-32da-45a3-a497-78e97999d244",
+        "measures": [
+          {
+            "name": "Target",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "expression": [
+              "",
+              "IF(",
+              "\tHASONEVALUE('Salesperson (Performance)'[Salesperson]),",
+              "\tSUM(Targets[TargetAmount])",
+              ")"
+            ],
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
+            "lineageTag": "ffc79c2c-8c37-499d-919a-2a3511102514"
+          },
+          {
+            "name": "Variance",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "expression": [
+              "",
+              "IF(    ",
+              "    HASONEVALUE('Salesperson (Performance)'[Salesperson]),    ",
+              "    SUM(Sales[Sales]) - [Target]",
+              ")"
+            ],
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
+            "lineageTag": "b4b78e5d-a649-4965-9c84-fae75fa12d98"
+          },
+          {
+            "name": "Variance Margin",
+            "expression": [
+              "",
+              "DIVIDE([Variance], [Target])"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "35ad240b-b1a0-4fce-8c33-f0f9bb99044a"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Targets",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/MicrosoftLearning/PL-300-Microsoft-Power-BI-Data-Analyst/Main/Allfiles/Resources/ResellerSalesTargets.csv\"),[Delimiter=\",\", Columns=14, Encoding=1200, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Year\", Int64.Type}, {\"EmployeeID\", Int64.Type}, {\"M01\", type text}, {\"M02\", type text}, {\"M03\", type text}, {\"M04\", type text}, {\"M05\", type text}, {\"M06\", type text}, {\"M07\", type text}, {\"M08\", type text}, {\"M09\", type text}, {\"M10\", type text}, {\"M11\", type text}, {\"M12\", type text}}),",
+                "    #\"Unpivoted Other Columns\" = Table.UnpivotOtherColumns(#\"Changed Type\", {\"Year\", \"EmployeeID\"}, \"Attribute\", \"Value\"),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Unpivoted Other Columns\", each ([Value] <> \"-\")),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Filtered Rows\",{{\"Attribute\", \"MonthNumber\"}, {\"Value\", \"Target\"}}),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Renamed Columns\",\"M\",\"\",Replacer.ReplaceText,{\"MonthNumber\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Replaced Value\",{{\"MonthNumber\", Int64.Type}}),",
+                "    #\"Inserted Merged Column\" = Table.AddColumn(#\"Changed Type1\", \"TargetMonth\", each Text.Combine({Text.From([MonthNumber], \"en-US\"), \"/1/\", Text.From([Year], \"en-US\")}), type text),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Inserted Merged Column\",{\"Year\", \"MonthNumber\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Removed Columns\",{{\"Target\", Currency.Type}, {\"TargetMonth\", type date}}),",
+                "    #\"Multiplied Column\" = Table.TransformColumns(#\"Changed Type2\", {{\"Target\", each _ * 1000, Currency.Type}}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Multiplied Column\",{{\"Target\", \"TargetAmount\"}})",
+                "in",
+                "    #\"Renamed Columns1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Salesperson",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "7a6709a77b9643b98d040b09ca89debc"
+          }
+        ],
+        "columns": [
+          {
+            "name": "EmployeeKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "description": "Salesperson related to Sales",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "591f68d7-bfad-4d7f-8842-0cb8498d0495",
+            "sourceColumn": "Salesperson (Performance)[EmployeeKey]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "EmployeeID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "description": "Salesperson related to Sales",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "4bf7f41f-a528-41f8-9199-f11b756e2c19",
+            "sourceColumn": "Salesperson (Performance)[EmployeeID]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Title",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "1466b05f-5751-4cac-b629-a33b5548417d",
+            "sourceColumn": "Salesperson (Performance)[Title]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "UPN",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "description": "Salesperson related to Sales",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "89a9123a-ff31-473a-8f27-f8e396f7ed76",
+            "sourceColumn": "Salesperson (Performance)[UPN]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Salesperson",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "8459bc64-a465-4094-ac97-0202fdb87d70",
+            "sourceColumn": "Salesperson (Performance)[Salesperson]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "7d2bb797-a22f-4f92-93c2-336cc56df79c",
+        "partitions": [
+          {
+            "name": "Salesperson",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "",
+                "'Salesperson (Performance)'"
+              ],
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Date",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "0134230ccc964dfc9692eda19262bb05"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isDataTypeInferred": true,
+            "isKey": true,
+            "isNameInferred": true,
+            "lineageTag": "f5fc300c-7163-45ab-8d2a-2fced06c3523",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "",
+              "\"FY\" & YEAR('Date'[Date]) + IF(MONTH('Date'[Date]) > 6, 1)"
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "5a2c0a6a-d861-42ec-8ee1-310f36848145",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "",
+              "'Date'[Year] & \" Q\"",
+              "    & IF(",
+              "        MONTH('Date'[Date]) <= 3,",
+              "        3,",
+              "        IF(",
+              "            MONTH('Date'[Date]) <= 6,",
+              "            4,",
+              "            IF(",
+              "                MONTH('Date'[Date]) <= 9,",
+              "                1,",
+              "                2",
+              "            )",
+              "        )",
+              "    )",
+              ""
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "e9a5fee7-a117-478a-9a66-4e3696372c9d",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "",
+              "FORMAT('Date'[Date], \"yyyy MMM\")"
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "c79e80fe-a254-4b38-9e01-c1c810dfaf43",
+            "sortByColumn": "MonthKey",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthKey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "expression": [
+              "",
+              "(YEAR('Date'[Date]) * 100) + MONTH('Date'[Date])"
+            ],
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "lineageTag": "f26d8342-6ed4-46bc-b3c5-39efc04ce822",
+            "summarizeBy": "count",
+            "type": "calculated"
+          }
+        ],
+        "dataCategory": "Time",
+        "hierarchies": [
+          {
+            "name": "Fiscal",
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "5730c2a5-ef6f-4b85-969f-dbdff05407e7",
+                "ordinal": 0
+              }
+            ],
+            "lineageTag": "a3a45406-031d-4167-b6ec-c0a9608e95a8"
+          }
+        ],
+        "lineageTag": "b11a86cf-d92e-4f86-bce2-8906a4823d37",
+        "partitions": [
+          {
+            "name": "Date",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "",
+                "CALENDARAUTO(6)"
+              ],
+              "type": "calculated"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
